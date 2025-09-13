@@ -1,0 +1,46 @@
+ALGORITHM sum_distinct_elements
+VAR
+    set1, set2 : ARRAY OF INTEGER
+    n1, n2 : INTEGER                // sizes of the two sets
+    i, j : INTEGER
+    found : BOOLEAN                 // flag to check if an element exists in both sets
+    sum : INTEGER                   // final result
+
+BEGIN
+    sum <- 0                         // initialize sum to zero
+
+    // Step 1: check each element of set1
+    // If the element is NOT found in set2, add it to sum
+    FOR i <- 1 TO n1 DO
+        found <- FALSE
+        FOR j <- 1 TO n2 DO
+            IF set1[i] = set2[j] THEN
+                found <- TRUE        // element exists in both sets
+            END_IF
+        END_FOR
+        IF found = FALSE THEN
+            sum <- sum + set1[i]     // add unique element from set1
+        END_IF
+    END_FOR
+
+    // Step 2: check each element of set2
+    // If the element is NOT found in set1, add it to sum
+    FOR i <- 1 TO n2 DO
+        found <- FALSE
+        FOR j <- 1 TO n1 DO
+            IF set2[i] = set1[j] THEN
+                found <- TRUE        // element exists in both sets
+            END_IF
+        END_FOR
+        IF found = FALSE THEN
+            sum <- sum + set2[i]     // add unique element from set2
+        END_IF
+    END_FOR
+
+    // Step 3: display final result
+    Write("Sum of distinct elements = ", sum)
+END
+
+
+
+

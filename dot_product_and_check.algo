@@ -1,0 +1,40 @@
+ALGORITHM dot_product_and_check
+VAR
+    v1, v2 : ARRAY OF REAL          // arrays to store the two vectors
+    n : INTEGER                     // size of the vectors
+    ps : REAL                       // result of dot product
+
+// Function to compute the dot product of two vectors
+FUNCTION dot_product(v1, v2 : ARRAY OF REAL; n : INTEGER) : REAL
+VAR
+    i : INTEGER
+    result : REAL
+BEGIN
+    result <- 0
+    // Loop through each position of the vectors
+    FOR i <- 1 TO n DO
+        result <- result + v1[i] * v2[i]   // multiply corresponding elements and add
+    END_FOR
+    RETURN result                          // return the final sum
+END_FUNCTION
+
+BEGIN
+    // Step 1: read the size of the vectors
+    Read(n)
+
+    // Step 2: read the elements of the first vector
+    Read(v1[1..n])
+
+    // Step 3: read the elements of the second vector
+    Read(v2[1..n])
+
+    // Step 4: call the function to compute the dot product
+    ps <- dot_product(v1, v2, n)
+
+    // Step 5: check orthogonality
+    IF ps = 0 THEN
+        Write("Vectors are orthogonal")        // dot product is zero
+    ELSE
+        Write("Vectors are not orthogonal")    // dot product is not zero
+    END_IF
+END
